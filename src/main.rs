@@ -1,29 +1,27 @@
 extern crate gtk;
+extern crate gdk_pixbuf;
+
 use gtk::prelude::*;
 use gtk::{Window, Button, Builder, WindowType, Label, Image, Fixed};
+use gdk_pixbuf::{Pixbuf,PixbufLoader};
 use std::path::Path;
 use std::ffi::OsStr;
 use std::fs;
 
 static ALPHABET: &'static str = "jpg;png;gif;tiff;bmp;jpg-large;jpeg";
 
-
-fn sdasd () {
-}
-
-fn main() {
+pub fn main() {
     if gtk::init().is_err() {
         println!("Failed to initialize GTK.");
         return;
     }
 
     let paths = fs::read_dir("./").unwrap();
-
     for path in paths {
-        println!("Name: {}", path.unwrap().path().display())
+        let path = path.unwrap();
+        println!("Name: {}", path.path().display());
+        let x = Pixbuf::new_from_file(path.path().to_str().unwrap());
     }
-
-
 
     // todo
     // let default_folder = env::
